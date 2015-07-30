@@ -10,6 +10,10 @@ module.exports = (grunt) ->
                     'router.js': [
                         'src/router.coffee'
                     ]
+
+                    'router_simple.js': [
+                        'src/router_simple.coffee'
+                    ]
                 }
             }
         }
@@ -28,6 +32,10 @@ module.exports = (grunt) ->
                     'router.js': [
                         'router.js'
                     ]
+
+                    'router_simple.js': [
+                        'router_simple.js'
+                    ]
                 }
             }
 
@@ -43,6 +51,10 @@ module.exports = (grunt) ->
                 files: {
                     'router.min.js': [
                         'router.js'
+                    ]
+
+                    'router_simple.min.js': [
+                        'router_simple.js'
                     ]
                 }
             }
