@@ -1,0 +1,16 @@
+{
+  "name": "Router",
+  "authors": [
+    "Slawo Fu <tasty@cyberbeef.com>"
+  ],
+  "main": "router.js",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-cli": "*",
+    "grunt-contrib-coffee": "*",
+    "grunt-contrib-uglify": "*",
+    "jit-grunt": "*"
+  }
+}
