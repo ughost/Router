@@ -37,7 +37,30 @@
             return value;
         },
         set: function(selector, value) {
-            return this.storage[selector] = value;
+            var collection, j, len, results, stage, stages, storage;
+            if (value === void 0) {
+                return this.storage[selector] = value;
+            } else {
+                stages = selector.split(".");
+                storage = this.storage;
+                results = [];
+                for (j = 0, len = stages.length; j < len; j++) {
+                    stage = stages[j];
+                    if (stage.length === 0) {
+                        break;
+                    }
+                    collection = storage[stage];
+                    if (collection === void 0) {
+                        collection = storage[stage] = {};
+                    }
+                    if (typeof collection !== "object") {
+                        break;
+                    } else {
+                        results.push(storage = collection);
+                    }
+                }
+                return results;
+            }
         }
     };
 }).call(this);

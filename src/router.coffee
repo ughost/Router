@@ -31,5 +31,19 @@
 
     set: (selector, value) ->
         #?handle multi-level selector
-        @storage[selector] = value
+        if value is undefined
+            @storage[selector] = value
+        else
+            stages = selector.split '.'
+            storage = @storage
+
+            for stage in stages
+                if stage.length is 0 then break
+                
+                collection = storage[stage]
+                if collection is undefined then collection = storage[stage] = {}
+
+                if typeof collection isnt 'object' then break
+                else storage = collection
+
 }
