@@ -30,7 +30,6 @@
         value
 
     set: (selector, value) ->
-        #?handle multi-level selector
         if value is undefined
             @storage[selector] = value
         else
