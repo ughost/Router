@@ -1,48 +1,44 @@
 @Router = {
-    storage: {}
+    _: {}
 
     get: (selector, params) ->
-        if selector.indexOf '.' isnt -1
+        value = ''
+
+        if selector.indexOf('.') isnt -1
             stages = selector.split '.'
-            storage = @storage
+            _ = @_
 
             for stage in stages
-                if stage.length is 0
-                    value = ''
-                    break
-
-                collection = storage[stage]
+                collection = _[stage]
                 if collection isnt undefined
                     if typeof collection isnt 'string'
-                        storage = collection
-                    else value = collection
-                else
-                    value = ''
-                    break
+                        _ = collection
+                    else
+                        value = collection
+                else break
 
-        else value = @storage[selector] or ''
+        else value = @_[selector] or ''
 
         if params isnt undefined
             for param of params
-                regexp = new RegExp '\\%'+param+'\\%', i
-                value = value.replace regexp, params[param]
+                value = value.replace new RegExp('\\%'+param+'\\%', 'i'), params[param]
 
         value
 
     set: (selector, value) ->
-        if value is undefined
-            @storage[selector] = value
+        if selector.indexOf('.') is -1
+            @_[selector] = value
         else
             stages = selector.split '.'
-            storage = @storage
+            data = @_
+            last = stages.length - 1
 
-            for stage in stages
-                if stage.length is 0 then break
-                
-                collection = storage[stage]
-                if collection is undefined then collection = storage[stage] = {}
+            for key, name of stages
+                if key * 1 is last
+                    data[name] = value
+                else
+                    if data[name] is undefined
+                        data[name] = {}
 
-                if typeof collection isnt 'object' then break
-                else storage = collection
-
+                    data = data[name]
 }
